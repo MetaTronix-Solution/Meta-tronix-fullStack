@@ -4,7 +4,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  role: "ADMIN";
+  role: "USER" | "ADMIN";
   refreshToken?: string;
 }
 
@@ -36,8 +36,8 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["ADMIN"],
-      default: "ADMIN",
+      enum: ["USER", "ADMIN"],
+      default: "USER",
     },
     refreshToken: {
       type: String,
