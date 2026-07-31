@@ -8,7 +8,7 @@ const router = express.Router();
 
 /**
  * @openapi
- * /api/auth/login:
+ * /api/v1/auth/login:
  *   post:
  *     summary: Log in a user
  *     tags: [Auth]
@@ -36,7 +36,7 @@ router.post("/login", validate(loginSchema), AuthController.handleUserLogin);
 
 /**
  * @openapi
- * /api/auth/refresh:
+ * /api/v1/auth/refresh:
  *   post:
  *     summary: Rotate refresh token and issue a new access token
  *     tags: [Auth]
@@ -50,7 +50,7 @@ router.post("/refresh", AuthController.handleRefreshAccessToken);
 
 /**
  * @openapi
- * /api/auth/logout:
+ * /api/v1/auth/logout:
  *   post:
  *     summary: Log out the current user
  *     tags: [Auth]
@@ -64,7 +64,7 @@ router.post("/logout", AuthController.handleUserLogout);
 
 /**
  * @openapi
- * /api/auth/me:
+ * /api/v1/auth/me:
  *   get:
  *     summary: Get the current authenticated user
  *     tags: [Auth]
