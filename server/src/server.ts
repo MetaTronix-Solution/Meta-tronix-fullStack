@@ -9,7 +9,8 @@ dotenv.config();
 import { connectDb } from "./config/connectdb";
 import authRouter from "./routes/auth.router";
 import { seedAdmin } from "./seed/admin.seed";
-
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1/auth", authRouter);
 
 const port = process.env.PORT || 4000;
