@@ -29,7 +29,7 @@ export const protect = async (
       throw new AppError("User no longer exists", 401);
     }
 
-    req.user = {
+    (req as any).user = {
       id: decoded.sub,
       role: decoded.role,
     };
@@ -42,7 +42,7 @@ export const protect = async (
 
 export const authorizeRoles = (...roles: ("USER" | "ADMIN")[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user || !roles.includes(req.user.role)) {
+    if (!(req as any).user || !roles.includes((req as any).user.role)) {
       return next(new AppError("You do not have permission", 403));
     }
 

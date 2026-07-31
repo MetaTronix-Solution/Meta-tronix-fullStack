@@ -8,6 +8,8 @@ dotenv.config();
 
 import { connectDb } from "./config/connectdb";
 import authRouter from "./routes/auth.router";
+import { seedAdmin } from "./seed/admin.seed";
+
 
 const app = express();
 
@@ -39,6 +41,8 @@ app.use("/health", (req: Request, res: Response) => {
 async function startServer() {
   try {
     await connectDb(process.env.MONGO_DB_URL!);
+
+    await seedAdmin();
 
     app.listen(port, () => {
       console.log(`Server is running in the port ${port}`);
