@@ -8,9 +8,9 @@ import { JwtService } from "../util/jwt";
 const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "strict" as const,
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-};
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+} as const;
 
 class AuthController {
   // Login
@@ -117,11 +117,7 @@ class AuthController {
       refreshToken: null,
     });
 
-    res.clearCookie("refreshToken", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
+    res.clearCookie("refreshToken", cookieOptions);
 
     res.status(200).json({
       success: true,
