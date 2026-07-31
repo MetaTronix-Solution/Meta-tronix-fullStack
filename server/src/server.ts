@@ -1,9 +1,12 @@
 import express from "express";
+import { Request, Response } from "express";
 import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
+
+import { connectDb } from "./config/connectdb";
 
 const app = express();
 
@@ -26,6 +29,20 @@ app.use(cookieParser());
 
 const port = process.env.PORT || 4000;
 
-app.listen(port, () => {
-  console.log(`Server is running in the port ${port}`);
+app.use("/health", (req: Request, res: Response) => {
+  res.json({ success: true, message: "working properly" });
 });
+
+async function startServer() {
+  try {
+    await connectDb(process.env.MONGO_DB_URL!);
+
+    app.listen(port, () => {
+      console.log(`Server is running in the port ${port}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+  }
+}
+
+startServer();
