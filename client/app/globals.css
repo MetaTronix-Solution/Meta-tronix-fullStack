@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-navy: #0f172a;
+  --brand-body: #334155;
+  --brand-muted: #64748b;
+  --brand-border: #e2e8f0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  @apply bg-white antialiased text-brand-body;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-content,
+  .animate-hero-visual {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /** Faint dot grid, Linear-style */
+  .bg-dot-grid {
+    background-color: #ffffff;
+    background-image: radial-gradient(circle, #e2e8f0 1.2px, transparent 1.2px);
+    background-size: 22px 22px;
+  }
+
+  /** Soft teal mesh behind hero (very light) */
+  .bg-mesh-light {
+    background-image:
+      radial-gradient(ellipse 100% 80% at 80% 20%, rgba(14, 165, 233, 0.08), transparent 50%),
+      radial-gradient(ellipse 70% 50% at 10% 80%, rgba(6, 182, 212, 0.06), transparent 45%);
+  }
+}
