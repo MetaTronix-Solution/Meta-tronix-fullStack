@@ -1,8 +1,9 @@
+import AdminDashboard from "@/components/dashboard/AdminDashboard";
+
 export default function DashboardPage() {
   return (
-    <div>
-      <h1 className="text-2xl font-semibold text-brand-navy">Dashboard</h1>
-      <p className="mt-2 text-brand-muted">Overview goes here.</p>
+    <div className="h-full w-full">
+      <AdminDashboard />
     </div>
   );
 }
