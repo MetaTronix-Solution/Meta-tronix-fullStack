@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { seoKeywords } from "@/lib/seo-keywords";
-import { siteEmail, linkedInUrl, facebookUrl, sitePhoneE164 } from "@/lib/contact-info";
+import {
+  siteEmail,
+  linkedInUrl,
+  facebookUrl,
+  sitePhoneE164,
+} from "@/lib/contact-info";
 import { getSiteUrl } from "@/lib/site-url";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 const siteUrl = getSiteUrl();
 
@@ -108,9 +111,7 @@ export default function RootLayout({
             __html: JSON.stringify(structuredDataJsonLd),
           }}
         />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
