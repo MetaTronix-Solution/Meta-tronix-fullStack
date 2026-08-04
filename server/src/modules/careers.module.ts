@@ -10,28 +10,21 @@ export interface ICareer {
     | "contract"
     | "internship"
     | "remote";
-
   workplace: "onsite" | "remote" | "hybrid";
-
   description: string;
   responsibilities: string[];
   requirements: string[];
   preferredQualifications: string[];
-
   salary?: {
     min: number;
     max: number;
     currency: string;
   };
-
   experience: string;
-
   vacancies: number;
-
   applicationDeadline?: Date;
-
   status: "draft" | "open" | "closed";
-
+  createdBy: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -124,6 +117,11 @@ const careerSchema = new mongoose.Schema<ICareer>(
       type: String,
       enum: ["draft", "open", "closed"],
       default: "draft",
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
   },
   {
