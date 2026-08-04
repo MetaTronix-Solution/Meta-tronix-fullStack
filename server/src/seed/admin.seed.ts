@@ -3,6 +3,16 @@ import User from "../modules/auth.module";
 
 export async function seedAdmin() {
   try {
+    if (
+      !process.env.ADMIN_EMAIL ||
+      !process.env.ADMIN_PASSWORD ||
+      !process.env.ADMIN_NAME
+    ) {
+      throw new Error(
+        "Missing ADMIN_NAME/ADMIN_EMAIL/ADMIN_PASSWORD in environment",
+      );
+    }
+
     const adminExists = await User.findOne({ role: "ADMIN" });
 
     if (adminExists) {
@@ -17,7 +27,6 @@ export async function seedAdmin() {
       email: process.env.ADMIN_EMAIL,
       password: hashedPassword,
       role: "ADMIN",
-      refreshToken: null,
     });
 
     console.log("Admin account created");
