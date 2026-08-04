@@ -113,6 +113,34 @@ router.post(
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               department:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *               employmentType:
+ *                 type: string
+ *                 enum: [full-time, part-time, contract, internship, remote]
+ *               workplace:
+ *                 type: string
+ *                 enum: [onsite, remote, hybrid]
+ *               description:
+ *                 type: string
+ *               experience:
+ *                 type: string
+ *               vacancies:
+ *                 type: integer
+ *               status:
+ *                 type: string
+ *                 enum: [draft, open, closed]
  *     responses:
  *       200:
  *         description: Career updated

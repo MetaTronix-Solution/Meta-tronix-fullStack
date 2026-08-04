@@ -31,7 +31,13 @@ export const createCareerSchema = z.object({
       preferredQualifications: z.array(z.string().trim()).default([]),
       salary: salarySchema.optional(),
       experience: z.string().min(1),
-      vacancies: z.number().int().min(1).default(1),
+      vacancies: z.preprocess(
+        (val) =>
+          val === 0 || val === undefined || val === null || val === ""
+            ? 1
+            : val,
+        z.number().int().min(1),
+      ),
       applicationDeadline: z.coerce.date().optional(),
       status: statusEnum.default("draft"),
     })

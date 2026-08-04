@@ -99,7 +99,10 @@ class CarrerController {
       throw new AppError("Invalid career ID", 400);
     }
 
-    const deleteCareer = await Career.findByIdAndDelete(id);
+    const deleteCareer = await Career.findOneAndDelete({
+      _id: id,
+      createdBy: (req as any).user?.id,
+    });
 
     if (!deleteCareer) {
       throw new AppError("Career not found", 404);
