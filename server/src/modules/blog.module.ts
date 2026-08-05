@@ -5,7 +5,7 @@ export interface IBlog extends Document {
   slug: string;
   imageUrl: string;
   content: string;
-  author: mongoose.Types.ObjectId;
+  author: string;
   published: boolean;
   publishedAt?: Date;
   category: "Tech" | "Startup" | "AI" | "Design" | "IOT";
@@ -38,7 +38,6 @@ const blogSchema = new Schema<IBlog>(
       type: String,
       required: [true, "Image URL is required"],
       trim: true,
-      match: [/^https?:\/\/.+/, "Please enter a valid image URL"],
     },
 
     content: {
@@ -48,10 +47,11 @@ const blogSchema = new Schema<IBlog>(
     },
 
     author: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
       required: [true, "Author is required"],
-      index: true,
+      trim: true,
+      minlength: [2, "Author name must be at least 2 characters"],
+      maxlength: [50, "Author name cannot exceed 50 characters"],
     },
 
     category: {

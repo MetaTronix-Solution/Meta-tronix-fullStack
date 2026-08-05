@@ -12,6 +12,51 @@ const router = express.Router();
 
 /**
  * @openapi
+ * components:
+ *   schemas:
+ *     TeamSocials:
+ *       type: object
+ *       properties:
+ *         linkedin:
+ *           type: string
+ *           nullable: true
+ *         github:
+ *           type: string
+ *           nullable: true
+ *         email:
+ *           type: string
+ *           format: email
+ *           nullable: true
+ *     TeamMember:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: 66d0f1c2a4b5c6d7e8f9a0b1
+ *         name:
+ *           type: string
+ *           minLength: 2
+ *           maxLength: 50
+ *         role:
+ *           type: string
+ *           maxLength: 100
+ *         bio:
+ *           type: string
+ *           maxLength: 500
+ *         photoUrl:
+ *           type: string
+ *         socials:
+ *           $ref: '#/components/schemas/TeamSocials'
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @openapi
  * /api/v1/team:
  *   get:
  *     summary: Get all team members
@@ -66,11 +111,12 @@ router.get("/:id", TeamController.handleGetTeamById);
  *                 type: string
  *               bio:
  *                 type: string
- *               socialsLinkedin:
+ *               socials[linkedin]:
  *                 type: string
- *               socialsGithub:
+ *                 description: Sent as a bracketed form field since the model stores socials as a nested object
+ *               socials[github]:
  *                 type: string
- *               socialsEmail:
+ *               socials[email]:
  *                 type: string
  *               photo:
  *                 type: string
@@ -120,11 +166,11 @@ router.post(
  *                 type: string
  *               bio:
  *                 type: string
- *               socialsLinkedin:
+ *               socials[linkedin]:
  *                 type: string
- *               socialsGithub:
+ *               socials[github]:
  *                 type: string
- *               socialsEmail:
+ *               socials[email]:
  *                 type: string
  *               photo:
  *                 type: string

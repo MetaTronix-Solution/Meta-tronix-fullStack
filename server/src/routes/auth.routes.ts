@@ -8,6 +8,35 @@ const router = express.Router();
 
 /**
  * @openapi
+ * components:
+ *   schemas:
+ *     AuthUser:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: 66d0f1c2a4b5c6d7e8f9a0b1
+ *         name:
+ *           type: string
+ *           minLength: 2
+ *           maxLength: 50
+ *         email:
+ *           type: string
+ *           format: email
+ *         role:
+ *           type: string
+ *           enum: [USER, ADMIN]
+ *           example: ADMIN
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @openapi
  * /api/v1/auth/login:
  *   post:
  *     summary: Log in a user

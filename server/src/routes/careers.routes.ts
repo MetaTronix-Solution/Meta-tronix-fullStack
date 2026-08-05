@@ -12,6 +12,81 @@ const router = express.Router();
 
 /**
  * @openapi
+ * components:
+ *   schemas:
+ *     Salary:
+ *       type: object
+ *       properties:
+ *         min:
+ *           type: number
+ *         max:
+ *           type: number
+ *         currency:
+ *           type: string
+ *           default: NPR
+ *     Career:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: 66d0f1c2a4b5c6d7e8f9a0b1
+ *         title:
+ *           type: string
+ *           maxLength: 100
+ *         department:
+ *           type: string
+ *         location:
+ *           type: string
+ *         employmentType:
+ *           type: string
+ *           enum: [full-time, part-time, contract, internship, remote]
+ *         workplace:
+ *           type: string
+ *           enum: [onsite, remote, hybrid]
+ *         description:
+ *           type: string
+ *         responsibilities:
+ *           type: array
+ *           items:
+ *             type: string
+ *         requirements:
+ *           type: array
+ *           items:
+ *             type: string
+ *         preferredQualifications:
+ *           type: array
+ *           items:
+ *             type: string
+ *         salary:
+ *           $ref: '#/components/schemas/Salary'
+ *         experience:
+ *           type: string
+ *         vacancies:
+ *           type: integer
+ *           default: 1
+ *           minimum: 1
+ *         applicationDeadline:
+ *           type: string
+ *           format: date-time
+ *           nullable: true
+ *         status:
+ *           type: string
+ *           enum: [draft, open, closed]
+ *           default: draft
+ *         createdBy:
+ *           type: string
+ *           description: ObjectId of the User who created this posting
+ *           example: 66d0f1c2a4b5c6d7e8f9a0b1
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @openapi
  * /api/v1/careers:
  *   get:
  *     summary: Get all career postings
@@ -62,6 +137,7 @@ router.get("/:id", CareersController.handleGetCareerById);
  *             properties:
  *               title:
  *                 type: string
+ *                 maxLength: 100
  *               department:
  *                 type: string
  *               location:
@@ -74,10 +150,28 @@ router.get("/:id", CareersController.handleGetCareerById);
  *                 enum: [onsite, remote, hybrid]
  *               description:
  *                 type: string
+ *               responsibilities:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               requirements:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               preferredQualifications:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               salary:
+ *                 $ref: '#/components/schemas/Salary'
  *               experience:
  *                 type: string
  *               vacancies:
  *                 type: integer
+ *                 minimum: 1
+ *               applicationDeadline:
+ *                 type: string
+ *                 format: date-time
  *               status:
  *                 type: string
  *                 enum: [draft, open, closed]
@@ -122,6 +216,7 @@ router.post(
  *             properties:
  *               title:
  *                 type: string
+ *                 maxLength: 100
  *               department:
  *                 type: string
  *               location:
@@ -134,10 +229,28 @@ router.post(
  *                 enum: [onsite, remote, hybrid]
  *               description:
  *                 type: string
+ *               responsibilities:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               requirements:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               preferredQualifications:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               salary:
+ *                 $ref: '#/components/schemas/Salary'
  *               experience:
  *                 type: string
  *               vacancies:
  *                 type: integer
+ *                 minimum: 1
+ *               applicationDeadline:
+ *                 type: string
+ *                 format: date-time
  *               status:
  *                 type: string
  *                 enum: [draft, open, closed]

@@ -10,6 +10,7 @@ import { connectDb } from "./config/connectdb";
 import authRouter from "./routes/auth.routes";
 import careersRouter from "./routes/careers.routes";
 import teamRouter from "./routes/team.routes";
+import blogRouter from "./routes/blog.routes";
 import { seedAdmin } from "./seed/admin.seed";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
@@ -37,6 +38,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/careers", careersRouter);
 app.use("/api/v1/team", teamRouter);
+app.use("/api/v1/blogs", blogRouter);
 
 const port = process.env.PORT || 4000;
 
