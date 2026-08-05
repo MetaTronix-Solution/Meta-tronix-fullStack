@@ -59,3 +59,4 @@ export const createUploader = (
 
 export const uploadBlogImage = createUploader("blogs");
 export const uploadTeamPhoto = createUploader("team");
+export const uploadProductImage = createUploader("product");
