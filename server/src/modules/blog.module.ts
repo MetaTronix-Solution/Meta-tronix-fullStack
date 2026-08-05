@@ -10,6 +10,7 @@ export interface IBlog extends Document {
   publishedAt?: Date;
   category: "Tech" | "Startup" | "AI" | "Design" | "IOT";
   readMinutes: number;
+  createdBy: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -76,6 +77,12 @@ const blogSchema = new Schema<IBlog>(
       type: Number,
       default: 1,
       min: [1, "Read time must be at least 1 minute"],
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
     },
   },
   {
