@@ -68,7 +68,6 @@ class BlogController {
         author,
         category,
         published,
-        createdBy: req.user!.id,
       });
 
       return res.status(201).json({
@@ -93,10 +92,7 @@ class BlogController {
       throw new AppError("Invalid blog ID.", 400);
     }
 
-    const existingBlog = await Blog.findOne({
-      _id: id,
-      createdBy: req.user!.id,
-    });
+    const existingBlog = await Blog.findById(id);
 
     if (!existingBlog) {
       if (req.file) {
@@ -158,17 +154,10 @@ class BlogController {
     }
 
     try {
-      const updatedBlog = await Blog.findOneAndUpdate(
-        {
-          _id: id,
-          createdBy: req.user!.id,
-        },
-        updateData,
-        {
-          new: true,
-          runValidators: true,
-        },
-      );
+      const updatedBlog = await Blog.findByIdAndUpdate(id, updateData, {
+        new: true,
+        runValidators: true,
+      });
 
       if (req.file && existingBlog.imageUrl) {
         await deleteUpload(existingBlog.imageUrl);
@@ -195,10 +184,7 @@ class BlogController {
       throw new AppError("Invalid blog ID.", 400);
     }
 
-    const blog = await Blog.findOne({
-      _id: id,
-      createdBy: req.user!.id,
-    });
+    const blog = await Blog.findById(id);
 
     if (!blog) {
       throw new AppError("Blog not found.", 404);
